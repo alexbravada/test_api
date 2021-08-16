@@ -23,17 +23,11 @@ from models import *
 
 Base.metadata.create_all(bind=engine)
 
-
 app.debug = True
 app.secret_key = "123"
 
 
-
-
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-
-
 
 
 @app.teardown_appcontext
@@ -41,11 +35,14 @@ def shutdown_session(exception=None):
     session.remove()
 
 
+# @app.route('/api/apps/<int:app_id>/<message>/', methods=['GET'])
+# def get_list(app_id, message):
+#     return f"<p> fff {app_id}{message}</p>"
 
+@app.route('/api/apps/<int:app_id>/', methods=['POST'])
+def add_info(app_id):
+    message = request.POST['message']
 
-@app.route('/api/apps/<int:app_id>', methods=['GET'])
-def get_list(app_id):
-    return f"<p> fff {app_id}</p>"
 
 
 # @app.route('/tutorials', methods=['POST'])
