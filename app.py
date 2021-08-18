@@ -76,7 +76,6 @@ def add_info():
 # req = client.post('/api/apps/', json = {"app_id":23, "message":"OK:200"})
 
 
-
 @cel.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
     # Calls test('hello') every 10 seconds.
