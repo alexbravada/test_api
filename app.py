@@ -1,3 +1,5 @@
+import schedule
+
 from flask import Flask, jsonify, request
 
 from celery import Celery
