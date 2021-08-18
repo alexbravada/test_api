@@ -2,7 +2,9 @@ import time
 
 from app import db, session, Base
 
-#id записи, id приложения, текущее дата и время, информационное сообщение от приложения. (Это пример, не требование)
+# id записи, id приложения, текущее дата и время, информационное сообщение от приложения.
+# ЭТО ЗАПРОС К БД для SQLAlchemy
+# q = session.query(appInfo.app_id, func.max(appInfo.date).group_by(appInfo.app_id).having(func.max(appInfo.ts) < (time.time()-N*60)*1000)
 
 
 class appInfo(Base):
