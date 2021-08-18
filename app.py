@@ -58,9 +58,6 @@ from models import *
 
 Base.metadata.create_all(bind=engine)
 
-# @app.route('/api/apps/<int:app_id>/<message>/', methods=['GET'])
-# def get_list(app_id, message):
-#     return f"<p> fff {app_id}{message}</p>"
 
 @app.route('/api/apps/', methods=['POST'])
 def add_info():
@@ -76,8 +73,8 @@ def add_info():
     session.commit()
     return "233"
 
-# req = client.post('/api/apps/', json = {"app_id":23, "message":"abcdefg"})
-#sd = session.query(appInfo).filter_by(app_id=88).order_by(func.max(appInfo.date)).all()
+# req = client.post('/api/apps/', json = {"app_id":23, "message":"OK:200"})
+
 
 
 @cel.on_after_configure.connect
@@ -104,8 +101,6 @@ def add(x, y):
     print(z)
 
 
-
-
 cel.conf.beat_schedule = {
     'add-every-30-seconds': {
         'task': 'tasks.add',
@@ -116,9 +111,6 @@ cel.conf.beat_schedule = {
 cel.conf.timezone = 'UTC'
 
 
-
-
-
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     session.remove()
@@ -127,18 +119,7 @@ def shutdown_session(exception=None):
 if __name__ == '__main__':
     app.run()
 
-#q = session.query(Apps.app_id, func.max(Apps.ts).group_by(User.app_id).having(func.max(Apps.ts) < (time.time()-N*60)*1000)
+# ЭТО ЗАПРОС К БД КОТОРЫЙ Я ДОЛЖЕН ДЕЛАТЬ С ПОМОЩЬЮ Celery
+#q = session.query(appInfo.app_id, func.max(appInfo.date).group_by(appInfo.app_id).having(func.max(appInfo.ts) < (time.time()-N*60)*1000)
 
 
-
-# query = session.query(
-#     func.date(SpendEstimation.time).label('date'),
-#     SpendEstimation.resource_id,
-#     SpendEstimation.time
-# ).distinct(
-#     func.date(SpendEstimation.time).label('date')
-# ).order_by(
-#     func.date(SpendEstimation.time).label('date'),
-#     SpendEstimation.time
-# )
-#query.filter(User.bank_address == request.form['bank_address_field']).first()
